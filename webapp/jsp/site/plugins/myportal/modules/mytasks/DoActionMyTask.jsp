@@ -9,7 +9,7 @@
 <%
 	try
 	{
-		response.sendRedirect( myPortalMyTasksApp.doActionMyTask( request ));	
+		response.sendRedirect( myPortalMyTasksApp.doActionMyTask( request ) );
 	}
 	catch ( PageNotFoundException pnfe )
 	{

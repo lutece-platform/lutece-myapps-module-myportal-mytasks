@@ -1,9 +1,16 @@
 <div id="mytasks">
 	<h3>#i18n{mytasks.mytasks.pageTitle}</h3>
 	<p>
-		<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}">
-			<span class="mytasks-plus">+</span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}
-		</a>
+		<script type="text/javascript">
+			document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="ceebox">' );		
+			document.write( '<span class="mytasks-plus">+</span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}' );
+			document.write( '</a>' );
+		</script>
+		<noscript>
+			<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="ceebox">
+				<span class="mytasks-plus">+</span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}
+			</a>
+		</noscript>
 	</p>
 	<form method="post" action="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp">
 		<input type="hidden" name="action" value="do_change_mytasks_status" />
@@ -12,18 +19,38 @@
 	   	<#list mytasks_list as mytask>
 	   		<#if mytask.isDone(  )>
 	   			<p>
-					<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" checked="checked" />
+					<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" checked="checked" onclick="changeMyTaskStatus( this, 'do_change_mytask_status', ${id_widget}, ${mytask.idMyTask} );" />
 					<span class="mytasks-done">
-						&nbsp;<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}">${mytask.name}</a>
+						&nbsp;
+						<script type="text/javascript">
+							document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">' );
+							document.write( '${mytask.name}' );
+							document.write( '</a>' );
+						</script>
+						<noscript>
+							<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">
+								${mytask.name}
+							</a>
+						</noscript>
 						<br/>
 						${mytask.date?date}
 					</span>
 				</p>
 	   		<#else>
 	   			<p>
-					<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" />
+					<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" onclick="changeMyTaskStatus( this, 'do_change_mytask_status', ${id_widget}, ${mytask.idMyTask} );" />
 					<span>
-						&nbsp;<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}">${mytask.name}</a>
+						&nbsp;
+						<script type="text/javascript">
+							document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">' );
+							document.write( '${mytask.name}' );
+							document.write( '</a>' );
+						</script>
+						<noscript>
+							<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">
+								${mytask.name}
+							</a>
+						</noscript>
 						<br/>
 						${mytask.date?date}
 					</span>
@@ -31,8 +58,8 @@
 	   		</#if>
 	   	</#list>
 	   	<input type="submit" value="#i18n{mytasks.mytasks.buttonRefresh}" />
-	   	<a href="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp?action=do_delete_completed_mytasks&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}">
-	   		<input type="button" value="#i18n{mytasks.mytasks.buttonDeleteCompletedTasks}" />
+	   	<a href="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp?action=do_delete_completed_mytasks&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="mytasks-button">
+	   		#i18n{mytasks.mytasks.buttonDeleteCompletedTasks}
 	   	</a>
 	</form>
 </div>

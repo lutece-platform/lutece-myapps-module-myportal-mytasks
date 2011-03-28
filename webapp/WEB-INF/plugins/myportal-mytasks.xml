@@ -22,5 +22,10 @@
             <application-class>fr.paris.lutece.plugins.myportal.modules.mytasks.web.MyPortalMyTasksApp</application-class>
         </application>
     </applications>
+    
+    <!-- JS -->
+    <javascript-files>
+         <javascript-file>myportal/modules/mytasks/myportal-mytasks.js</javascript-file>
+    </javascript-files>
 
 </plug-in>

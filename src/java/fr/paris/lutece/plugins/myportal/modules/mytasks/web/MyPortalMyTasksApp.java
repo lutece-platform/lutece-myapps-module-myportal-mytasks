@@ -84,12 +84,14 @@ public class MyPortalMyTasksApp extends MyTasksApp
     // ACTIONS
     private static final String ACTION_ADD_MYTASK = "add_mytask";
     private static final String ACTION_UPDATE_MYTASK = "update_mytask";
+    private static final String ACTION_DO_CHANGE_MYTASK_STATUS = "do_change_mytask_status";
 
     // PROPERTIES
     private static final String PROPERTY_PAGE_PATH = "mytasks.mytasks.pagePathLabel";
     private static final String PROPERTY_ADD_MYTASK_PAGE_TITLE = "mytasks.add_mytask.pageTitle";
     private static final String PROPERTY_UPDATE_MYTASK_PAGE_TITLE = "mytasks.update_mytask.pageTitle";
     private MyTasksService _myTasksService = MyTasksService.getInstance(  );
+    private WidgetContentService _widgetContentService = WidgetContentService.instance(  );
 
     /**
      * Returns the content of the page myportal.
@@ -249,8 +251,28 @@ public class MyPortalMyTasksApp extends MyTasksApp
         if ( StringUtils.isNotBlank( strIdWidget ) && StringUtils.isNumeric( strIdWidget ) )
         {
             int nIdWidget = Integer.parseInt( strIdWidget );
-            WidgetContentService.instance(  ).removeCache( nIdWidget );
-            strUrl = super.doActionMyTask( request );
+            String strAction = request.getParameter( PARAMETER_ACTION );
+
+            // Action specific to the module : change status of only one task
+            if ( StringUtils.isNotBlank( strAction ) && ACTION_DO_CHANGE_MYTASK_STATUS.equals( strAction ) )
+            {
+                String strIdMyTask = request.getParameter( PARAMETER_ID_MYTASK );
+
+                if ( StringUtils.isNotBlank( strIdMyTask ) && StringUtils.isNumeric( strIdMyTask ) )
+                {
+                    _widgetContentService.removeCache( nIdWidget );
+
+                    int nIdMyTask = Integer.parseInt( strIdMyTask );
+                    MyTask myTask = _myTasksService.getMyTask( nIdMyTask );
+                    myTask.setDone( !myTask.isDone(  ) );
+                    _myTasksService.doUpdateMyTask( myTask, getUser( request ) );
+                }
+            }
+            else
+            {
+                _widgetContentService.removeCache( nIdWidget );
+                strUrl = super.doActionMyTask( request );
+            }
         }
         else
         {
