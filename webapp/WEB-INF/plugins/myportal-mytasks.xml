@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plug-in>
+
+    <name>myportal-mytasks</name>
+    <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
+    <version>1.0.0</version>
+    <documentation></documentation>
+    <installation></installation>
+    <changes></changes>
+    <user-guide></user-guide>
+    <description>module.myportal.mytasks.module.description</description>
+    <provider>module.myportal.mytasks.module.provider</provider>
+    <provider-url>http://www.lutece.paris.fr</provider-url>
+    <icon-url>images/admin/skin/plugins/myportal/myportal.png</icon-url>
+    <copyright>Copyright (c) City of Paris</copyright>
+    <db-pool-required>0</db-pool-required>
+    
+    <!-- Applications -->
+    <applications>
+        <application>
+            <application-id>myportal-mytasks</application-id>
+            <application-class>fr.paris.lutece.plugins.myportal.modules.mytasks.web.MyPortalMyTasksApp</application-class>
+        </application>
+    </applications>
+
+</plug-in>

@@ -1,0 +1,47 @@
+<#include "../../../../../util/calendar/macro_datepicker.html" />
+<div class="span-22 prepend-1 append-1 append-bottom last">
+    <div class="portlet -lutece-border-radius">
+    	<h2>#i18n{mytasks.update_mytask.pageTitle}</h2>
+    	<#if mytasks_url_return?? && mytasks_url_return != "">
+    		<form method="post" action="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp">
+    			<input type="hidden" name="action" value="do_update_mytask" />
+    			<input type="hidden" name="mytasks_url_return" value="${mytasks_url_return}" />
+    	<#else>
+    		<form method="post" action="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=do_update_mytask">
+    	</#if>
+    		<input type="hidden" name="id_widget" value="${id_widget}" />
+    		<input type="hidden" name="id_mytask" value="${mytask.idMyTask}" />
+	    	<p>
+				#i18n{mytasks.update_mytask.labelMandatoryFields}
+			</p>
+	    	<p>
+	    		<label for="mytask_date">#i18n{mytasks.update_mytask.labelDate}</label>
+	    		<br />
+	    		<input id="mytask_date" type="text" name="mytask_date" value="${mytask.date?date}" />
+	    	</p>
+	    	<p>
+	    		<label for="mytask_name">#i18n{mytasks.update_mytask.labelName}</label>
+	    		<br />
+	    		<input type="text" name="mytask_name" value="${mytask.name}" />
+	    	</p>
+	    	<p>
+	    		<#if mytasks_url_return?? && mytasks_url_return != "">
+	    			<a href="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp?action=do_remove_mytask&amp;id_mytask=${mytask.idMyTask}&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}">
+	    		<#else>
+		    		<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=do_remove_mytask&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}">
+		    	</#if>
+	    			<input type="button" value="#i18n{mytasks.update_mytask.buttonDelete}" />
+	    		</a>
+	    		<input type="submit" value="#i18n{mytasks.update_mytask.buttonModify}" />
+	    		<#if mytasks_url_return?? && mytasks_url_return != "">
+	    			<a href="${mytasks_url_return}">
+	    		<#else>
+	    			<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;id_widget=${id_widget}">
+	    		</#if>
+	    			<input type="button" value="#i18n{mytasks.update_mytask.buttonCancel}" />
+	    		</a>
+	    	</p>
+	    </form>
+    </div>
+</div>
+<@getDatePicker idField="mytask_date" language=locale />
