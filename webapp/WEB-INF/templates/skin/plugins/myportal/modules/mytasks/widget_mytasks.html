@@ -2,9 +2,12 @@
 	<h3>#i18n{mytasks.mytasks.pageTitle}</h3>
 	<p>
 		<script type="text/javascript">
-			document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="ceebox">' );		
-			document.write( '<span class="mytasks-plus">+</span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}' );
-			document.write( '</a>' );
+			if ( typeof( isWritten ) == 'undefined' ) {
+				document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="ceebox">' );		
+				document.write( '<span class="mytasks-plus">+</span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}' );
+				document.write( '</a>' );
+				isWritten = true;
+			}
 		</script>
 		<noscript>
 			<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="ceebox">
