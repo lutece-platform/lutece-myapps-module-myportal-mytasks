@@ -20,47 +20,42 @@
 		<input type="hidden" name="id_widget" value="${id_widget}" />
 		<input type="hidden" name="mytasks_url_return" value="${mytasks_url_return}" />
 	   	<#list mytasks_list as mytask>
-	   		<#if mytask.isDone(  )>
-	   			<p>
-					<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" checked="checked" onclick="changeMyTaskStatus( this, 'do_change_mytask_status', ${id_widget}, ${mytask.idMyTask} );" />
-					<span class="mytasks-done">
-						&nbsp;
-						<script type="text/javascript">
+   			<p>
+				<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" onclick="changeMyTaskStatus( this, 'do_change_mytask_status', ${id_widget}, ${mytask.idMyTask} );" 
+					<#if mytask.isDone(  )>
+						checked="checked"
+					</#if>
+				/>
+				<span 
+					<#if mytask.isDone(  )>
+						class="mytasks-done"
+					</#if>
+				>
+					&nbsp;
+					<script type="text/javascript">
+						if ( typeof( isMyTaskWritten ) == 'undefined' || typeof( isMyTaskWritten[${mytask.idMyTask}] ) == 'undefined' ) {
+							if ( typeof( isMyTaskWritten ) == 'undefined' ) {
+								isMyTaskWritten = new Array(  );
+							}
 							document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">' );
 							document.write( '${mytask.name}' );
 							document.write( '</a>' );
-						</script>
-						<noscript>
-							<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">
-								${mytask.name}
-							</a>
-						</noscript>
-						<br/>
-						${mytask.date?date}
-					</span>
-				</p>
-	   		<#else>
-	   			<p>
-					<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" onclick="changeMyTaskStatus( this, 'do_change_mytask_status', ${id_widget}, ${mytask.idMyTask} );" />
-					<span>
-						&nbsp;
-						<script type="text/javascript">
-							document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">' );
-							document.write( '${mytask.name}' );
-							document.write( '</a>' );
-						</script>
-						<noscript>
-							<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">
-								${mytask.name}
-							</a>
-						</noscript>
-						<br/>
-						${mytask.date?date}
-					</span>
-				</p>
-	   		</#if>
+							isMyTaskWritten[${mytask.idMyTask}] = true;
+						}
+					</script>
+					<noscript>
+						<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">
+							${mytask.name}
+						</a>
+					</noscript>
+					<br/>
+					${mytask.date?date}
+				</span>
+			</p>
 	   	</#list>
-	   	<input type="submit" value="#i18n{mytasks.mytasks.buttonRefresh}" />
+	   	<noscript>
+	   		<input type="submit" value="#i18n{mytasks.mytasks.buttonRefresh}" />
+	   	</noscript>
 	   	<a href="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp?action=do_delete_completed_mytasks&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="mytasks-button">
 	   		#i18n{mytasks.mytasks.buttonDeleteCompletedTasks}
 	   	</a>
