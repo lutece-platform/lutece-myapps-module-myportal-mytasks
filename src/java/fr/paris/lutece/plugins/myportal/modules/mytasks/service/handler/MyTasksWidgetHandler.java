@@ -105,6 +105,14 @@ public class MyTasksWidgetHandler implements WidgetHandler
     {
         return DESCRIPTION;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isCustomizable(  )
+    {
+    	return true;
+    }
 
     /**
      * Build the url return
