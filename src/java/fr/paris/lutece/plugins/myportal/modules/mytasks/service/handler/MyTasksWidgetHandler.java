@@ -34,14 +34,13 @@
 package fr.paris.lutece.plugins.myportal.modules.mytasks.service.handler;
 
 import fr.paris.lutece.plugins.myportal.business.Widget;
-import fr.paris.lutece.plugins.myportal.service.MyPortalPlugin;
 import fr.paris.lutece.plugins.myportal.service.handler.WidgetHandler;
 import fr.paris.lutece.plugins.mytasks.business.MyTask;
 import fr.paris.lutece.plugins.mytasks.service.MyTasksService;
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.util.html.HtmlTemplate;
-import fr.paris.lutece.util.url.UrlItem;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,13 +63,13 @@ public class MyTasksWidgetHandler implements WidgetHandler
     // TEMPLATES
     private static final String TEMPLATE_WIDGET_MYTASKS = "skin/plugins/myportal/modules/mytasks/widget_mytasks.html";
 
-    // PARAMETERS
-    private static final String PARAMETER_PAGE = "page";
-
     // MARKS
     private static final String MARK_MYTASKS_LIST = "mytasks_list";
     private static final String MARK_MYTASK_URL_RETURN = "mytasks_url_return";
     private static final String MARK_ID_WIDGET = "id_widget";
+
+    // PROPERTIES
+    private static final String PROPERTY_URL_RETURN = "myportal-mytasks.urlReturn";
 
     /**
      * {@inheritDoc }
@@ -82,7 +81,7 @@ public class MyTasksWidgetHandler implements WidgetHandler
 
         Map<String, Object> model = new HashMap<String, Object>(  );
         model.put( MARK_MYTASKS_LIST, listMyTasks );
-        model.put( MARK_MYTASK_URL_RETURN, buildUrlReturn( request ) );
+        model.put( MARK_MYTASK_URL_RETURN, AppPropertiesService.getProperty( PROPERTY_URL_RETURN ) );
         model.put( MARK_ID_WIDGET, widget.getIdWidget(  ) );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_WIDGET_MYTASKS, locale, model );
@@ -105,25 +104,12 @@ public class MyTasksWidgetHandler implements WidgetHandler
     {
         return DESCRIPTION;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public boolean isCustomizable(  )
     {
-    	return true;
-    }
-
-    /**
-     * Build the url return
-     * @param request {@link HttpServletRequest}
-     * @return the url return
-     */
-    private String buildUrlReturn( HttpServletRequest request )
-    {
-        UrlItem url = new UrlItem( request.getRequestURI(  ) );
-        url.addParameter( PARAMETER_PAGE, MyPortalPlugin.PLUGIN_NAME );
-
-        return url.getUrl(  );
+        return true;
     }
 }

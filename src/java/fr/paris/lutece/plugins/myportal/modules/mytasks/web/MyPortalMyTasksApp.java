@@ -67,9 +67,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MyPortalMyTasksApp extends MyTasksApp
 {
-	// CONSTANTS
-	private static final String BEAN_MYPORTAL_WIDGET_CONTENT_SERVICE = "myportal.widgetContentService";
-	
+    // CONSTANTS
+    private static final String BEAN_MYPORTAL_WIDGET_CONTENT_SERVICE = "myportal.widgetContentService";
+
     // TEMPLATES
     private static final String TEMPLATE_ADD_MYTASK_PAGE = "skin/plugins/myportal/modules/mytasks/add_mytask.html";
     private static final String TEMPLATE_EDIT_MYTASK_PAGE = "skin/plugins/myportal/modules/mytasks/update_mytask.html";
@@ -96,8 +96,8 @@ public class MyPortalMyTasksApp extends MyTasksApp
     private static final String PROPERTY_ADD_MYTASK_PAGE_TITLE = "mytasks.add_mytask.pageTitle";
     private static final String PROPERTY_UPDATE_MYTASK_PAGE_TITLE = "mytasks.update_mytask.pageTitle";
     private MyTasksService _myTasksService = MyTasksService.getInstance(  );
-    private WidgetContentService _widgetContentService = (WidgetContentService) SpringContextService.getPluginBean( 
-    		MyPortalPlugin.PLUGIN_NAME, BEAN_MYPORTAL_WIDGET_CONTENT_SERVICE );
+    private WidgetContentService _widgetContentService = (WidgetContentService) SpringContextService.getPluginBean( MyPortalPlugin.PLUGIN_NAME,
+            BEAN_MYPORTAL_WIDGET_CONTENT_SERVICE );
 
     /**
      * Returns the content of the page myportal.
