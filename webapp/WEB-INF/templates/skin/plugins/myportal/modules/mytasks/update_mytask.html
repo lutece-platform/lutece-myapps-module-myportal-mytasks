@@ -4,11 +4,12 @@
     	<h2>#i18n{mytasks.update_mytask.pageTitle}</h2>
     	<#if mytasks_url_return?? && mytasks_url_return != "">
     		<form method="post" action="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp">
-    			<input type="hidden" name="action" value="do_update_mytask" />
     			<input type="hidden" name="mytasks_url_return" value="${mytasks_url_return}" />
     	<#else>
-    		<form method="post" action="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=do_update_mytask">
+    		<form method="post" action="jsp/site/Portal.jsp">
+    			<input type="hidden" name="page" value="myportal-mytasks" />
     	</#if>
+    		<input type="hidden" name="action" value="do_update_mytask" />
     		<input type="hidden" name="id_widget" value="${id_widget}" />
     		<input type="hidden" name="id_mytask" value="${mytask.idMyTask}" />
 	    	<p>
@@ -25,16 +26,16 @@
 	    		<input type="text" name="mytask_name" value="${mytask.name}" />
 	    	</p>
 	    	<p>
-	    		<#if mytasks_url_return?? && mytasks_url_return != "">
-	    			<a href="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp?action=do_remove_mytask&amp;id_mytask=${mytask.idMyTask}&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}">
+	    		<#if mytasks_url_return?? && mytasks_url_return != "" && myportal_url_return?? && myportal_url_return != "">
+	    			<a href="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp?action=do_remove_mytask&amp;id_mytask=${mytask.idMyTask}&amp;mytasks_url_return=${mytasks_url_return}&amp;myportal_url_return=${myportal_url_return}&amp;id_widget=${id_widget}">
 	    		<#else>
 		    		<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=do_remove_mytask&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}">
 		    	</#if>
 	    			<input type="button" value="#i18n{mytasks.update_mytask.buttonDelete}" />
 	    		</a>
 	    		<input type="submit" value="#i18n{mytasks.update_mytask.buttonModify}" />
-	    		<#if mytasks_url_return?? && mytasks_url_return != "">
-	    			<a href="${mytasks_url_return}">
+	    		<#if myportal_url_return?? && myportal_url_return != "">
+	    			<a href="${myportal_url_return}">
 	    		<#else>
 	    			<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;id_widget=${id_widget}">
 	    		</#if>

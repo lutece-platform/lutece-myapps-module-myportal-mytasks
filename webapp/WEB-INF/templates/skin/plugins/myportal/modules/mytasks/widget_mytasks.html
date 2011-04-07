@@ -3,14 +3,14 @@
 	<p>
 		<script type="text/javascript">
 			if ( typeof( isWritten ) == 'undefined' ) {
-				document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="ceebox">' );		
+				document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;myportal_url_return=${myportal_url_return}&amp;id_widget=${id_widget}" class="ceebox">' );		
 				document.write( '<span class="mytasks-plus">+</span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}' );
 				document.write( '</a>' );
 				isWritten = true;
 			}
 		</script>
 		<noscript>
-			<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="ceebox">
+			<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=add_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;myportal_url_return=${myportal_url_return}&amp;id_widget=${id_widget}" class="ceebox">
 				<span class="mytasks-plus">+</span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}
 			</a>
 		</noscript>
@@ -19,6 +19,7 @@
 		<input type="hidden" name="action" value="do_change_mytasks_status" />
 		<input type="hidden" name="id_widget" value="${id_widget}" />
 		<input type="hidden" name="mytasks_url_return" value="${mytasks_url_return}" />
+		<input type="hidden" name="myportal_url_return" value="${myportal_url_return}" />
 	   	<#list mytasks_list as mytask>
    			<p>
 				<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" onclick="changeMyTaskStatus( this, 'do_change_mytask_status', ${id_widget}, ${mytask.idMyTask} );" 
@@ -37,14 +38,14 @@
 							if ( typeof( isMyTaskWritten ) == 'undefined' ) {
 								isMyTaskWritten = new Array(  );
 							}
-							document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">' );
+							document.write( '<a href="jsp/site/RunStandaloneApp.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;myportal_url_return=${myportal_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">' );
 							document.write( '${mytask.name}' );
 							document.write( '</a>' );
 							isMyTaskWritten[${mytask.idMyTask}] = true;
 						}
 					</script>
 					<noscript>
-						<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">
+						<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=update_mytask&amp;mytasks_url_return=${mytasks_url_return}&amp;myportal_url_return=${myportal_url_return}&amp;id_mytask=${mytask.idMyTask}&amp;id_widget=${id_widget}" class="ceebox">
 							${mytask.name}
 						</a>
 					</noscript>
@@ -56,7 +57,7 @@
 	   	<noscript>
 	   		<input type="submit" value="#i18n{mytasks.mytasks.buttonRefresh}" />
 	   	</noscript>
-	   	<a href="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp?action=do_delete_completed_mytasks&amp;mytasks_url_return=${mytasks_url_return}&amp;id_widget=${id_widget}" class="mytasks-button">
+	   	<a href="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp?action=do_delete_completed_mytasks&amp;mytasks_url_return=${mytasks_url_return}&amp;myportal_url_return=${myportal_url_return}&amp;id_widget=${id_widget}" class="mytasks-button">
 	   		#i18n{mytasks.mytasks.buttonDeleteCompletedTasks}
 	   	</a>
 	</form>

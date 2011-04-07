@@ -69,6 +69,7 @@ public class MyPortalMyTasksApp extends MyTasksApp
 {
     // CONSTANTS
     private static final String BEAN_MYPORTAL_WIDGET_CONTENT_SERVICE = "myportal.widgetContentService";
+    private static final String USER_ANONYMOUS = "Anonymous";
 
     // TEMPLATES
     private static final String TEMPLATE_ADD_MYTASK_PAGE = "skin/plugins/myportal/modules/mytasks/add_mytask.html";
@@ -79,11 +80,13 @@ public class MyPortalMyTasksApp extends MyTasksApp
     private static final String PARAMETER_ID_MYTASK = "id_mytask";
     private static final String PARAMETER_ID_WIDGET = "id_widget";
     private static final String PARAMETER_MYTASK_URL_RETURN = "mytasks_url_return";
+    private static final String PARAMETER_MYPORTAL_URL_RETURN = "myportal_url_return";
 
     // MARKS
     private static final String MARK_MYTASK = "mytask";
     private static final String MARK_LOCALE = "locale";
     private static final String MARK_MYTASKS_URL_RETURN = "mytasks_url_return";
+    private static final String MARK_MYPORTAL_URL_RETURN = "myportal_url_return";
     private static final String MARK_ID_WIDGET = "id_widget";
 
     // ACTIONS
@@ -162,18 +165,25 @@ public class MyPortalMyTasksApp extends MyTasksApp
         getUser( request );
 
         String strIdWidget = request.getParameter( PARAMETER_ID_WIDGET );
-        String strUrlReturn = request.getParameter( PARAMETER_MYTASK_URL_RETURN );
+        String strMyPortalMyTasksUrlReturn = request.getParameter( PARAMETER_MYTASK_URL_RETURN );
+        String strMyPortalUrlReturn = request.getParameter( PARAMETER_MYPORTAL_URL_RETURN );
 
-        if ( StringUtils.isBlank( strUrlReturn ) )
+        if ( StringUtils.isBlank( strMyPortalMyTasksUrlReturn ) )
         {
-            strUrlReturn = StringUtils.EMPTY;
+            strMyPortalMyTasksUrlReturn = StringUtils.EMPTY;
+        }
+
+        if ( StringUtils.isBlank( strMyPortalUrlReturn ) )
+        {
+            strMyPortalUrlReturn = StringUtils.EMPTY;
         }
 
         if ( StringUtils.isNotBlank( strIdWidget ) && StringUtils.isNumeric( strIdWidget ) )
         {
             Map<String, Object> model = new HashMap<String, Object>(  );
             model.put( MARK_LOCALE, request.getLocale(  ) );
-            model.put( MARK_MYTASKS_URL_RETURN, strUrlReturn );
+            model.put( MARK_MYTASKS_URL_RETURN, strMyPortalMyTasksUrlReturn );
+            model.put( MARK_MYPORTAL_URL_RETURN, strMyPortalUrlReturn );
             model.put( MARK_ID_WIDGET, strIdWidget );
 
             HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_ADD_MYTASK_PAGE, request.getLocale(  ),
@@ -207,11 +217,17 @@ public class MyPortalMyTasksApp extends MyTasksApp
 
         String strIdWidget = request.getParameter( PARAMETER_ID_WIDGET );
         String strIdMyTask = request.getParameter( PARAMETER_ID_MYTASK );
-        String strUrlReturn = request.getParameter( PARAMETER_MYTASK_URL_RETURN );
+        String strMyPortalMyTasksUrlReturn = request.getParameter( PARAMETER_MYTASK_URL_RETURN );
+        String strMyPortalUrlReturn = request.getParameter( PARAMETER_MYPORTAL_URL_RETURN );
 
-        if ( StringUtils.isBlank( strUrlReturn ) )
+        if ( StringUtils.isBlank( strMyPortalMyTasksUrlReturn ) )
         {
-            strUrlReturn = StringUtils.EMPTY;
+            strMyPortalMyTasksUrlReturn = StringUtils.EMPTY;
+        }
+
+        if ( StringUtils.isBlank( strMyPortalUrlReturn ) )
+        {
+            strMyPortalUrlReturn = StringUtils.EMPTY;
         }
 
         if ( StringUtils.isNotBlank( strIdWidget ) && StringUtils.isNumeric( strIdWidget ) &&
@@ -223,7 +239,8 @@ public class MyPortalMyTasksApp extends MyTasksApp
             Map<String, Object> model = new HashMap<String, Object>(  );
             model.put( MARK_MYTASK, myTask );
             model.put( MARK_LOCALE, request.getLocale(  ) );
-            model.put( MARK_MYTASKS_URL_RETURN, strUrlReturn );
+            model.put( MARK_MYTASKS_URL_RETURN, strMyPortalMyTasksUrlReturn );
+            model.put( MARK_MYPORTAL_URL_RETURN, strMyPortalUrlReturn );
             model.put( MARK_ID_WIDGET, strIdWidget );
 
             HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_EDIT_MYTASK_PAGE, request.getLocale(  ),
@@ -311,7 +328,7 @@ public class MyPortalMyTasksApp extends MyTasksApp
 
         if ( user == null )
         {
-            user = new MyPortalUser( "Anonymous" );
+            user = new MyPortalUser( USER_ANONYMOUS );
         }
 
         return user;

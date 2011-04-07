@@ -4,11 +4,13 @@
     	<h2>#i18n{mytasks.add_mytask.pageTitle}</h2>
     	<#if mytasks_url_return?? && mytasks_url_return != "">
     		<form method="post" action="jsp/site/plugins/myportal/modules/mytasks/DoActionMyTask.jsp">
-    			<input type="hidden" name="action" value="do_add_mytask" />
+    			
     			<input type="hidden" name="mytasks_url_return" value="${mytasks_url_return}" />
     	<#else>
-    		<form method="post" action="jsp/site/Portal.jsp?page=myportal-mytasks&amp;action=do_add_mytask">
+    		<form method="post" action="jsp/site/Portal.jsp">
+    		<input type="hidden" name="page" value="myportal-mytasks" />
     	</#if>
+    		<input type="hidden" name="action" value="do_add_mytask" />
     		<input type="hidden" name="id_widget" value="${id_widget}" />
 	    	<p>
 				#i18n{mytasks.add_mytask.labelMandatoryFields}
@@ -25,8 +27,8 @@
 	    	</p>
 	    	<p>
 	    		<input type="submit" value="#i18n{mytasks.add_mytask.buttonAdd}" />
-	    		<#if mytasks_url_return?? && mytasks_url_return != "">
-	    			<a href="${mytasks_url_return}">
+	    		<#if myportal_url_return?? && myportal_url_return != "">
+	    			<a href="${myportal_url_return}">
 	    		<#else>
 	    			<a href="jsp/site/Portal.jsp?page=myportal-mytasks&amp;id_widget=${id_widget}">
 	    		</#if>

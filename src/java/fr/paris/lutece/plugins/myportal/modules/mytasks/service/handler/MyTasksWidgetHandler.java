@@ -66,10 +66,12 @@ public class MyTasksWidgetHandler implements WidgetHandler
     // MARKS
     private static final String MARK_MYTASKS_LIST = "mytasks_list";
     private static final String MARK_MYTASK_URL_RETURN = "mytasks_url_return";
+    private static final String MARK_MYPORTAL_URL_RETURN = "myportal_url_return";
     private static final String MARK_ID_WIDGET = "id_widget";
 
     // PROPERTIES
-    private static final String PROPERTY_URL_RETURN = "myportal-mytasks.urlReturn";
+    private static final String PROPERTY_MYTASKS_URL_RETURN = "myportal-mytasks.urlReturn.mytasks";
+    private static final String PROPERTY_MYPORTAL_URL_RETURN = "myportal-mytasks.urlReturn.myportal";
 
     /**
      * {@inheritDoc }
@@ -81,7 +83,8 @@ public class MyTasksWidgetHandler implements WidgetHandler
 
         Map<String, Object> model = new HashMap<String, Object>(  );
         model.put( MARK_MYTASKS_LIST, listMyTasks );
-        model.put( MARK_MYTASK_URL_RETURN, AppPropertiesService.getProperty( PROPERTY_URL_RETURN ) );
+        model.put( MARK_MYTASK_URL_RETURN, AppPropertiesService.getProperty( PROPERTY_MYTASKS_URL_RETURN ) );
+        model.put( MARK_MYPORTAL_URL_RETURN, AppPropertiesService.getProperty( PROPERTY_MYPORTAL_URL_RETURN ) );
         model.put( MARK_ID_WIDGET, widget.getIdWidget(  ) );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_WIDGET_MYTASKS, locale, model );
