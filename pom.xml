@@ -9,7 +9,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>module-myportal-mytasks</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>Lutece MyPortal-MyTasks module</name>
     <repositories>
         <repository>
@@ -50,5 +50,6 @@
         <connection>scm:git:https://github.com/lutece-platform/lutece-myapps-module-myportal-mytasks.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-myapps-module-myportal-mytasks.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-myapps-module-myportal-mytasks.git</url>
-    </scm>
+      <tag>module-myportal-mytasks-1.0.1</tag>
+  </scm>
 </project>
